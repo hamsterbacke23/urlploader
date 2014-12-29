@@ -1,0 +1,16 @@
+{
+  "name": "converter",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "karma": "~0.12.28",
+    "karma-chrome-launcher": "~0.1.7",
+    "karma-jasmine": "~0.3.2"
+  }
+}
