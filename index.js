@@ -58,40 +58,62 @@ console.log(getTree(parents));
 //   }
 // }
 
+function extend(){
+  for (var i = 1; i < arguments.length; i++) {
+    for (var key in arguments[i]) {
+      if (arguments[i].hasOwnProperty(key)) {
+        arguments[0][key] = arguments[i][key];
+      }
+    }
+  }
+  return arguments[0];
+}
+
 function getTree(parents) {
   var result = [];
 
   parents.forEach(function(parent, index, array) {
-    var parts = parent.url.split('/');
-    var tmpPart = parts[parts.length - 1];
-    parts[parts.length - 1] = {};
-    parts[parts.length - 1].part = tmpPart;
-    parts[parts.length - 1].pages = parent.pages;
-
-    var paths = temp = {};
-
     var lastUrlPart;
     var newUrl;
+    var newItem;
     var pages;
     var tmpParts;
+    var cutLength
+
+    var parts = parent.url.split('/');
+    var tmpData = {
+      pages: parent.pages
+    };
+    var paths = temp = [];
+
+    var lastIndex = parts.length - 1;
+
+
     for (var i = 0; i < parts.length; i++) {
-      pages = parts[i] instanceof Object ? parts[i].pages : [];
-      lastUrlPart = parts[i] instanceof Object ? parts[i].part : parts[i];
+
+      pages = [];
       tmpParts = parts.slice(); // copy array
-      tmpParts.pop();
 
-      var cutLength = parts.length - i - 1 > 0 ? parts.length - i - 1 : 0;
-
-      tmpParts.splice(-1,  cutLength);
-
+      // cut last few items away from all parts to get current url
+      cutLength = lastIndex - i > 0 ? lastIndex - i  : 0;
+      tmpParts.splice(- cutLength,  cutLength );
       newUrl = tmpParts.join('/');
-      newUrl = newUrl  + '/' + lastUrlPart;
 
-      temp[parts[i]] = {};
+      // make new item
+      newItem = {
+        pages: pages,
+        url : newUrl
+      };
 
-      temp[parts[i]].pages = pages;
-      temp[parts[i]].url = newUrl;
-      temp = temp[parts[i]].pages;
+
+      // if last item, overwrite with available data
+      if (i === lastIndex) {
+        newItem = extend(newItem, tmpData);
+      }
+
+      temp.push(newItem);
+      temp = newItem.pages;
+
     }
     console.log(paths);
 
