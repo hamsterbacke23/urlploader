@@ -1,4 +1,7 @@
 
+var deepExt = require('deep-extend');
+
+var subItemsKey = 'pages';
 
 var items = [
     {url: 'domain.com/a/veranstaltungen' , title: 'blubb', blocks:['a', 'b','c']},
@@ -7,9 +10,44 @@ var items = [
     {url: 'domain.com/a/b/troll', title: 'blubb3', blocks:['a', 'b','c']},
     {url: 'domain.com/a/c/vollab', title: 'blubb4', blocks:['a', 'b','c']},
     {url: 'domain.com/a/d/geht', title: 'blubb5', blocks:['a', 'b','c']},
-    {url: 'domain.com/a/d/a/diepost', title: 'blubb6', blocks:['a', 'b','c']}
+    {url: 'domain.com/a/d/a/diepost1', title: 'blubb6', blocks:['a', 'b','c']},
+    {url: 'blobb.com/a/d/a/diepost2', title: 'blubb6', blocks:['a', 'b','c']},
+    {url: 'blobb.com/a/a/diepost3', title: 'blubb6', blocks:['a', 'b','c']},
+    {url: 'blobb.com/a/a/diepost5', title: 'blubb6', blocks:['a', 'b','c']},
+    {url: 'klob.com/a/a/diepost4', title: 'blubb6', blocks:['a', 'b','c']}
 ];
 
+function treeToFlat(tree, flatResult) {
+  flatResult = flatResult ? flatResult : [];
+
+  for(var key in tree) {
+    if (!tree.hasOwnProperty(key)) {
+      continue;
+    }
+    if(tree[key].expand === true) {
+      delete tree[key].expand;
+      flatResult.push(tree[key], flatResult);
+    }
+    if (tree[key][subItemsKey]) {
+      treeToFlat(tree[key][subItemsKey], flatResult);
+    }
+  }
+
+  return flatResult;
+}
+
+parents = getParents(items);
+
+var treeRes = getTempTree(parents);
+// console.log('treeRes', JSON.stringify(treeRes, null, 2));
+
+// console.log('treeRes',treeRes);
+var test = treeRes.slice();
+var flat = treeToFlat(test);
+// console.log(tree);
+console.dir(flat);
+// console.log(JSON.stringify(treeRes, null, 2));
+// console.log(JSON.stringify(flatResult, null, 2));
 
 function getParents(items) {
   var result = [];
@@ -17,10 +55,12 @@ function getParents(items) {
   {
       var parentKey;
       var parent = [];
-      // url = str_replace('http://', '', url);
       var parts = item.url.split('/');
+      item.expand = true; // set identifier to be able to flatten again
+
       var lastItem;
 
+      // get the current url for current item
       if(parts.length > 2) {
         lastItem = parts.splice(-1, 1);
         parentKey = parts.join('/');
@@ -30,9 +70,9 @@ function getParents(items) {
       }
 
       var tItem = {};
-      var pages = [];
-      pages.push(item);
-      tItem.pages = pages;
+      var subItems = [];
+      subItems.push(item);
+      tItem[subItemsKey] = subItems;
       tItem.url = parentKey;
 
       result.push(tItem);
@@ -43,55 +83,67 @@ function getParents(items) {
 }
 
 
-parents = getParents(items);
-console.log(getTree(parents));
 
 
-// function getElementPosition(result, usedParts, leftParts) {
-//   // result[usedPart1][usedPart2]
-//   if(parts.length > 1) {
-//     var firstItem = parts.slice(0,1)[0];
-//     result.url = firstitem;
-//     result.pages = [];
+function getRidOfAssocKeys(input) {
+  if(input.constructor !== Array && input.constructor !== Object) {
+    return input;
+  }
 
-//     return getElementPosition
-//   }
-// }
-
-function extend(){
-  for (var i = 1; i < arguments.length; i++) {
-    for (var key in arguments[i]) {
-      if (arguments[i].hasOwnProperty(key)) {
-        arguments[0][key] = arguments[i][key];
+  // first iteration: loop through current item once
+  // and clean out array keys from array
+  for(var key in input) {
+    if (!input.hasOwnProperty(key)) {
+      continue;
+    }
+    if (key === subItemsKey && input[key].constructor === Array) {
+      var tmpArr = [];
+      for(var subKey in input[key]) {
+        tmpArr.push(input[key][subKey]);
       }
+      input[key] = tmpArr;
     }
   }
-  return arguments[0];
+
+  // just recurse
+  for(var key2 in input) {
+    if (!input.hasOwnProperty(key2)) {
+      continue;
+    }
+    input[key2] = getRidOfAssocKeys(input[key2]);
+  }
+
+  return input;
+
 }
 
-function getTree(parents) {
-  var result = [];
+function getTempTree(parents) {
+  var resultArr = [];
+  var result = {};
+  resultArr[0] = result;
+  result[subItemsKey] = [];
+  var j = 0;
+
 
   parents.forEach(function(parent, index, array) {
-    var lastUrlPart;
+
     var newUrl;
     var newItem;
-    var pages;
     var tmpParts;
-    var cutLength
+    var cutLength;
 
     var parts = parent.url.split('/');
-    var tmpData = {
-      pages: parent.pages
-    };
-    var paths = temp = [];
+    var tmpData = {};
+    tmpData[subItemsKey] = parent[subItemsKey];
 
+    var temp = [];
+    var paths = temp;
     var lastIndex = parts.length - 1;
-
+    var key;
+    var flagKey;
 
     for (var i = 0; i < parts.length; i++) {
 
-      pages = [];
       tmpParts = parts.slice(); // copy array
 
       // cut last few items away from all parts to get current url
@@ -100,30 +152,30 @@ function getTree(parents) {
       newUrl = tmpParts.join('/');
 
       // make new item
-      newItem = {
-        pages: pages,
-        url : newUrl
-      };
+      newItem = {};
+      newItem[subItemsKey] = [];
+      newItem.url = newUrl;
+      newItem.expand = false;
 
 
       // if last item, overwrite with available data
+      key = parts[i];
+
       if (i === lastIndex) {
-        newItem = extend(newItem, tmpData);
+        newItem = deepExt(newItem, tmpData);
+        key = key + j;
+        j++;
       }
 
-      temp.push(newItem);
-      temp = newItem.pages;
+      console.log(key);
 
+
+      temp[key] = newItem;
+      temp = newItem[subItemsKey];
     }
-    console.log(paths);
-
-    // for (var i = 0; i < paths.length; i++) {
-    //   i
-    //   paths[i]
-    // };
-
-
+    result[subItemsKey] = deepExt(result[subItemsKey], paths);
   });
-  return result;
+  result = getRidOfAssocKeys(result);
+  return resultArr;
 }
 

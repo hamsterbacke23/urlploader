@@ -1,7 +1,7 @@
 
 beforeEach(function () {
-
-    // jasmine.getJSONFixtures().fixturesPath='base/test/mock';
+  console.log(window.__html__);
+    // jasmine.getJsonFixtures().fixturesPath = 'base/test/mock';
 
     // $httpBackend.whenGET('http://blahblahurl/resultset/').respond(
     //     getJSONFixture('test_resultset_list.json')
@@ -13,7 +13,6 @@ beforeEach(function () {
 });
 
 describe( "Convert library", function () {
-
 
 
 

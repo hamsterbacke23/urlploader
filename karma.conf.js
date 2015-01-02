@@ -17,7 +17,7 @@ module.exports = function(config) {
     files: [
       'js/*.js',
       'test/**/*.js',
-      {pattern: 'test/mock/*.json', watched: true, served: true, included: false}
+      'test/**/*.json'
     ],
 
 
@@ -29,6 +29,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'test/mock/**/*.json': ['html2js']
     },
 
 
