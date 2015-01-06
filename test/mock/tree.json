@@ -1,0 +1,88 @@
+[
+  {
+    "pages": [
+      {
+        "title": "Startseite",
+        "blocks": [
+          {
+            "name": "bild"
+          },
+          {
+            "name": "text"
+          }
+        ],
+        "pages": [
+          {
+            "title": "Unterseite",
+            "blocks": [
+              {
+                "name": "bild"
+              },
+              {
+                "name": "bild"
+              },
+              {
+                "name": "text"
+              }
+            ],
+            "url": "startseite/unterseite",
+            "expand" : true
+          }
+        ],
+        "url": "startseite",
+        "expand" : false
+      },
+      {
+        "title": "Bilder",
+        "blocks": [
+          {
+            "name": "bild"
+          },
+          {
+            "name": "bild"
+          }
+        ],
+        "pages": [
+          {
+            "title": "Galerien",
+            "blocks": [
+              {
+                "name": "galerie"
+              }
+            ],
+            "pages": [],
+            "url": "bilder/galerien",
+            "expand" : true
+          },
+          {
+            "title": "Teaser",
+            "blocks": [
+              {
+                "name": "teaser"
+              }
+            ],
+            "pages": [],
+            "url": "bilder/teaser",
+            "expand" : true
+          }
+        ],
+        "url": "bilder",
+        "expand" : false
+      },
+      {
+        "title": "Formulare",
+        "blocks": [
+          {
+            "name": "formular"
+          }
+        ],
+        "pages": [],
+        "url": "formulare",
+        "expand" : true
+      }
+    ]
+  }
+]
+
+
+
