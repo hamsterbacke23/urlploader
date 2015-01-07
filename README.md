@@ -1,4 +1,6 @@
-# What does it do?
+[![Build Status](https://secure.travis-ci.org/hamsterbacke23/urlploader.svg)](http://travis-ci.org/hamsterbacke23/urlploader)
+
+## What does it do?
 Converts back and forth flat arrays with `url`-keys and arbitrary data to tree structured arrays.
 Like so:
 
@@ -61,7 +63,7 @@ Like so:
       }
     ]
 
-# Usage
+## Usage
     var urlPloader = require('urlploader');
     var up = new urlPloader({subItemKey: 'pages'});
 
