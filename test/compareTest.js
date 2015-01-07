@@ -3,9 +3,10 @@ var urlPloader = require('../urlploader'),
   util = require('util'),
   expect = require('chai').expect;
 
+
 describe("Urlploader", function() {
   describe("#toTree", function() {
-    var flatMock;
+    var flatMock, up;
     before(function(done) {
       fs.readFile('test/mock/flat.json', 'utf8', function (err, data) {
         if (err) throw err;
@@ -13,52 +14,44 @@ describe("Urlploader", function() {
 
         done();
       });
+      up = new urlPloader();
     });
 
     it("should produce the input object after building a tree and flattening it again", function(done) {
-      var up = new urlPloader();
 
-      var tmp = JSON.parse(JSON.stringify(flatMock));
-
-      var tree = up.toTree(tmp);
-
+      var tree = up.toTree(flatMock);
       var flat = up.toFlat(tree);
 
-      expect(flat).to.deep.equal(flatMock);
+      expect(flat).deep.include.members(flatMock);
       done();
     });
 
-    after(function() {
 
-    });
   });
 
-  // describe("#toFlat", function() {
-  //   var treeMock;
-  //   before(function(done) {
-  //     fs.readFile('test/mock/tree.json', 'utf8', function (err, data) {
-  //       if (err) throw err;
-  //       treeMock = JSON.parse(data);
-  //       done();
-  //     });
-  //   });
+  describe("#toFlat", function() {
+    var treeMock, up;
 
-  //   it("should produce the input object after building a tree and flattening it again", function(done) {
-  //     var up = new urlPloader();
-  //     var flat = up.toFlat(treeMock);
+    before(function(done) {
+      fs.readFile('test/mock/tree.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        treeMock = JSON.parse(data);
+        done();
+      });
 
-  //     // console.log(JSON.stringify(flat, null, 2));
-  //     up = new urlPloader();
-  //     var tree = up.toTree(flat);
-  //     // console.log('tree', JSON.stringify(tree, null, 2));
+      up = new urlPloader();
+    });
 
-  //     expect(tree).to.deep.equal(treeMock);
-  //     done();
-  //   });
+    it("should produce the input object after flattening it and building a tree again", function() {
 
-  //   after(function() {
+      var tmp = JSON.parse(JSON.stringify(treeMock));
+      var flat = up.toFlat(tmp);
+      var tree = up.toTree(flat);
 
-  //   });
-  // });
+      expect(treeMock).to.deep.equal(tree);
+    });
+
+
+  });
 
 });

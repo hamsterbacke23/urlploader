@@ -21,7 +21,7 @@ gulp.task('develop', function () {
 
 gulp.task('test', function () {
     return gulp.src('test/compareTest.js')
-        .pipe(mocha({reporter: 'list'})
+        .pipe(mocha({reporter: 'spec'})
         .on("error", handleError));
 });
 

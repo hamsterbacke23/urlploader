@@ -76,58 +76,13 @@ UrlPloader.prototype.getRidOfAssocKeys = function(input) {
 
 };
 
-UrlPloader.prototype.toTree = function(items) {
-  var parents = this.getParents(items);
-  return this.getTempTree(parents);
-};
-
-/**
- * First hierarchy level from flat elements
- * This step probably can be included into the tree function
- * @param  {array}
- * @return {array}
- */
-UrlPloader.prototype.getParents  = function(items) {
-
-  var subItemsKey = this.options.subItemsKey;
-  var result = [];
-  items.forEach(function(item, index, array)
-  {
-      var parentKey;
-      var parent = [];
-      var parts = item.url.split('/');
-      item.expand = true; // set identifier to be able to flatten again
-
-      var lastItem;
-
-      // get the current url for current item
-      if(parts.length > 2) {
-        lastItem = parts.splice(-1, 1);
-        parentKey = parts.join('/');
-        parent[parentKey] = lastItem;
-      } else {
-        parentKey = parts.join('/');
-      }
-
-      var tItem = {};
-      var subItems = [];
-      subItems.push(item);
-      tItem[subItemsKey] = subItems;
-      tItem.url = parentKey;
-
-      result.push(tItem);
-
-  });
-
-  return result;
-};
 
 /**
  * Main function to build the tree
  * @param  {array} parent child objects
  * @return {array} tree strucure array with objects
  */
-UrlPloader.prototype.getTempTree = function(parents) {
+UrlPloader.prototype.toTree = function(items) {
   var subItemsKey = this.options.subItemsKey;
 
   // build empty structure
@@ -139,12 +94,12 @@ UrlPloader.prototype.getTempTree = function(parents) {
 
   var j = 0;
 
-  parents.forEach(function(parent, index, array) {
+  items.forEach(function(item, index, array) {
     var newUrl, newItem, tmpParts, cutLength;
 
-    var parts = parent.url.split('/');
-    var tmpData = {};
-    tmpData[subItemsKey] = parent[subItemsKey];
+    var parts = item.url.split('/');
+    var tmpData = item;
+
 
     var temp = [];
     var paths = temp;
@@ -170,6 +125,7 @@ UrlPloader.prototype.getTempTree = function(parents) {
 
       // if last item, overwrite with available data
       if (i === lastIndex) {
+        newItem.expand = true;
         newItem = deepExt(newItem, tmpData);
 
         // as it is the last item, make key unique
