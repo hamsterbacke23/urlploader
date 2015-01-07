@@ -68,6 +68,6 @@ Like so:
     var up = new urlPloader({subItemKey: 'pages'});
 
     var flatArray = up.toFlat(myTree);
-    var treeArray = up.toFlat(flatArray);
+    var treeArray = up.toTree(flatArray);
 
 
