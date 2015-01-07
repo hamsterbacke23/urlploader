@@ -11,8 +11,8 @@
     "url": "https://github.com/hamsterbacke23/urlploader/issues"
   },
   "author": {
-    "name" :"Tobias Schmidt",
-    "email" : "tobias.schmidt@seitenbau.com"
+    "name": "Tobias Schmidt",
+    "email": "tobias.schmidt@seitenbau.com"
   },
   "license": "ISC",
   "devDependencies": {
@@ -22,7 +22,8 @@
     "gulp-mocha": "~2.0.0",
     "gulp-watch": "~3.0.0",
     "underscore": "~1.7.0",
-    "chai-fuzzy": "~1.4.0"
+    "chai-fuzzy": "~1.4.0",
+    "mocha": "~2.1.0"
   },
   "dependencies": {
     "deep-extend": "~0.3.2"
