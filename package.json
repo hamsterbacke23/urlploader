@@ -3,7 +3,17 @@
   "version": "0.0.1",
   "description": "",
   "main": "urlploader.js",
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hamsterbacke23/urlploader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hamsterbacke23/urlploader/issues"
+  },
+  "author": {
+    "name" :"Tobias Schmidt",
+    "email" : "tobias.schmidt@seitenbau.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "gulp": "^3.8.10",

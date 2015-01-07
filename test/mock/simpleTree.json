@@ -1,0 +1,30 @@
+[
+  {
+    "pages" : [
+      {
+        "url" : "mydomain.com",
+        "title" : "my start page",
+        "pages" : [
+          {
+            "url" : "mydomain.com/blog",
+            "title" : "Blog"
+          },
+          {
+            "url" : "mydomain.com/contact",
+            "title" : "Contact"
+          },
+          {
+            "url" : "mydomain.com/info",
+            "title" : "Info",
+            "pages" : [
+              {
+                "url" : "mydomain.com/info/sub",
+                "data" : {"key": "value1"}
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

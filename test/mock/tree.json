@@ -1,245 +1,67 @@
 [
   {
     "pages": [
+
       {
-        "pages": [],
-        "url": "domain.com",
-        "expand": true,
-        "title": "wot",
         "blocks": [
-          "a",
-          "b",
-          "c",
-          "d"
-        ]
-      },
-      {
-        "pages": [
           {
-            "pages": [],
-            "url": "domain.com/a",
-            "expand": true,
-            "title": "wot",
-            "blocks": [
-              "a",
-              "b",
-              "c",
-              "d"
-            ]
+            "name": "bild"
           },
           {
-            "pages": [
-              {
-                "pages": [],
-                "url": "domain.com/a/veranstaltungen",
-                "expand": true,
-                "title": "blubb",
-                "blocks": [
-                  "a",
-                  "b",
-                  "c",
-                  "d"
-                ]
-              },
-              {
-                "pages": [
-                  {
-                    "pages": [],
-                    "url": "domain.com/a/b/bibabutze",
-                    "expand": true,
-                    "more": "blubb1",
-                    "blocks": [
-                      "x",
-                      "b",
-                      "c"
-                    ]
-                  },
-                  {
-                    "pages": [],
-                    "url": "domain.com/a/b/mann",
-                    "expand": true,
-                    "data": {
-                      "whatup": true
-                    }
-                  },
-                  {
-                    "pages": [],
-                    "url": "domain.com/a/b/troll",
-                    "expand": true,
-                    "title": "blubb3",
-                    "blocks": [
-                      "a",
-                      "b",
-                      "c"
-                    ]
-                  }
-                ],
-                "url": "domain.com/a/b",
-                "expand": false
-              },
-              {
-                "pages": [
-                  {
-                    "pages": [],
-                    "url": "domain.com/a/c/vollab",
-                    "expand": true,
-                    "data": {
-                      "blocks": [
-                        "a",
-                        "z",
-                        "c"
-                      ]
-                    }
-                  }
-                ],
-                "url": "domain.com/a/c",
-                "expand": false
-              },
-              {
-                "pages": [
-                  {
-                    "pages": [],
-                    "url": "domain.com/a/d/geht",
-                    "expand": true,
-                    "title": "blubb5",
-                    "blocks": [
-                      "a",
-                      "v",
-                      "c"
-                    ]
-                  },
-                  {
-                    "pages": [
-                      {
-                        "pages": [],
-                        "url": "domain.com/a/d/a/diepost1",
-                        "expand": true,
-                        "title": "blubb6",
-                        "blocks": [
-                          123,
-                          "c"
-                        ]
-                      }
-                    ],
-                    "url": "domain.com/a/d/a",
-                    "expand": false
-                  }
-                ],
-                "url": "domain.com/a/d",
-                "expand": false
-              }
-            ],
-            "url": "domain.com/a",
-            "expand": false
+            "name": "text"
           }
         ],
-        "url": "domain.com",
-        "expand": false
+        "pages": [
+          {
+            "title": "Unterseite",
+            "blocks": [
+              {
+                "name": "bild"
+              },
+              {
+                "name": "bild"
+              },
+              {
+                "name": "text"
+              }
+            ],
+            "url": "startseite/unterseite"
+          }
+        ],
+        "url": "startseite"
       },
       {
         "pages": [
           {
-            "pages": [
+            "title": "Galerien",
+            "blocks": [
               {
-                "pages": [
-                  {
-                    "pages": [
-                      {
-                        "pages": [],
-                        "url": "blobb.com/a/d/a/diepost2",
-                        "expand": true,
-                        "title": "blubb6",
-                        "blocks": [
-                          "w",
-                          "b",
-                          "c"
-                        ]
-                      }
-                    ],
-                    "url": "blobb.com/a/d/a",
-                    "expand": false
-                  }
-                ],
-                "url": "blobb.com/a/d",
-                "expand": false
-              },
-              {
-                "pages": [
-                  {
-                    "pages": [],
-                    "url": "blobb.com/a/a/diepost3",
-                    "expand": true,
-                    "title": "blubb6",
-                    "blocks": [
-                      "q",
-                      "b",
-                      "c"
-                    ]
-                  },
-                  {
-                    "pages": [],
-                    "url": "blobb.com/a/a/diepost5",
-                    "expand": true,
-                    "title": "blubb6",
-                    "blocks": [
-                      "a"
-                    ]
-                  }
-                ],
-                "url": "blobb.com/a/a",
-                "expand": false
+                "name": "galerie"
               }
             ],
-            "url": "blobb.com/a",
-            "expand": false
+            "url": "bilder/galerien"
+          },
+          {
+            "title": "Teaser",
+            "blocks": [
+              {
+                "name": "teaser"
+              }
+            ],
+            "url": "bilder/teaser"
           }
         ],
-        "url": "blobb.com",
-        "expand": false
+        "url": "bilder",
+        "_expand": false
       },
       {
-        "pages": [
+        "title": "Formulare",
+        "blocks": [
           {
-            "pages": [
-              {
-                "pages": [
-                  {
-                    "pages": [],
-                    "url": "klob.com/a/a/diepost4",
-                    "expand": true,
-                    "title": "blubb6",
-                    "blocks": [
-                      "a",
-                      "b",
-                      "c"
-                    ]
-                  }
-                ],
-                "url": "klob.com/a/a",
-                "expand": false
-              },
-              {
-                "pages": [
-                  {
-                    "pages": [],
-                    "url": "klob.com/a/d/diepost4",
-                    "expand": true,
-                    "title": "blubb6",
-                    "blocks": [
-                      "wotaup"
-                    ]
-                  }
-                ],
-                "url": "klob.com/a/d",
-                "expand": false
-              }
-            ],
-            "url": "klob.com/a",
-            "expand": false
+            "name": "formular"
           }
         ],
-        "url": "klob.com",
-        "expand": false
+        "url": "formulare"
       }
     ]
   }

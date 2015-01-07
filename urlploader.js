@@ -26,10 +26,12 @@ UrlPloader.prototype.toFlat = function(tree, flatResult) {
     if (tree[key][subItemsKey] && tree[key][subItemsKey].length) {
       this.toFlat(tree[key][subItemsKey], flatResult);
     }
-    if(tree[key].expand === true) {
-      var tmp = tree[key];
-      delete tmp[subItemsKey];
-      delete tmp.expand;
+
+    var tmp = tree[key];
+
+    delete tmp[subItemsKey];
+
+    if(tmp && Object.keys(tmp).length > 0) {
       flatResult.push(tmp);
     }
   }
@@ -92,14 +94,11 @@ UrlPloader.prototype.toTree = function(items) {
   resultArr[0] = result;
   result[subItemsKey] = [];
 
-  var j = 0;
-
   items.forEach(function(item, index, array) {
     var newUrl, newItem, tmpParts, cutLength;
 
     var parts = item.url.split('/');
     var tmpData = item;
-
 
     var temp = [];
     var paths = temp;
@@ -119,21 +118,15 @@ UrlPloader.prototype.toTree = function(items) {
       newItem = {};
       newItem[subItemsKey] = [];
       newItem.url = newUrl;
-      newItem.expand = false;
-
-      key = parts[i];
+      // newItem._expand = false;
 
       // if last item, overwrite with available data
       if (i === lastIndex) {
-        newItem.expand = true;
+        delete newItem[subItemsKey]; // delete again for clean output of tmpData
         newItem = deepExt(newItem, tmpData);
-
-        // as it is the last item, make key unique
-        key = key + j;
-        j++;
       }
 
-      temp[key] = newItem;
+      temp[newUrl] = newItem;
       temp = newItem[subItemsKey];
     }
     result[subItemsKey] = deepExt(result[subItemsKey], paths);
