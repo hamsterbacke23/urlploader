@@ -1,5 +1,4 @@
 [
-  {"url": "domain.com" , "title": "wssot", "blocks":["www", "b","c", "d"]},
   {"url": "domain.com/a/kak" , "title": "wot", "blocks":["a", "b","c", "d"]},
   {"url": "domain.com/a/veranstaltungen/plorp" , "title": "blubb", "blocks":["a", "b","c", "d"]},
   {"url": "blobb.com/a/a/diepost3", "title": "blubb6", "blocks":["q", "b","c"]},
