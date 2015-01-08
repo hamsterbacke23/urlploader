@@ -1,8 +1,8 @@
 [
   {
     "pages": [
-
       {
+        "title": "Startseite",
         "blocks": [
           {
             "name": "bild"
@@ -25,12 +25,21 @@
                 "name": "text"
               }
             ],
-            "url": "startseite/unterseite"
+            "url": "https://startseite/unterseite"
           }
         ],
-        "url": "startseite"
+        "url": "https://startseite"
       },
       {
+        "title": "Bilder",
+        "blocks": [
+          {
+            "name": "bild"
+          },
+          {
+            "name": "bild"
+          }
+        ],
         "pages": [
           {
             "title": "Galerien",
@@ -39,7 +48,7 @@
                 "name": "galerie"
               }
             ],
-            "url": "bilder/galerien"
+            "url": "https://bilder/galerien"
           },
           {
             "title": "Teaser",
@@ -48,11 +57,10 @@
                 "name": "teaser"
               }
             ],
-            "url": "bilder/teaser"
+            "url": "https://bilder/teaser"
           }
         ],
-        "url": "bilder",
-        "_expand": false
+        "url": "https://bilder"
       },
       {
         "title": "Formulare",
@@ -61,7 +69,7 @@
             "name": "formular"
           }
         ],
-        "url": "formulare"
+        "url": "https://formulare"
       }
     ]
   }

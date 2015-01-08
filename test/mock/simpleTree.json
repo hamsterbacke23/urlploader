@@ -1,24 +1,24 @@
 [
   {
-    "pages" : [
+    "items" : [
       {
-        "url" : "mydomain.com",
+        "uri" : "mydomain.com",
         "title" : "my start page",
-        "pages" : [
+        "items" : [
           {
-            "url" : "mydomain.com/blog",
+            "uri" : "https://mydomain.com/blog",
             "title" : "Blog"
           },
           {
-            "url" : "mydomain.com/contact",
+            "uri" : "http://mydomain.com/contact",
             "title" : "Contact"
           },
           {
-            "url" : "mydomain.com/info",
+            "uri" : "/mydomain.com/info",
             "title" : "Info",
-            "pages" : [
+            "items" : [
               {
-                "url" : "mydomain.com/info/sub",
+                "uri" : "mydomain.com/info/sub",
                 "data" : {"key": "value1"}
               }
             ]

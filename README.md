@@ -65,7 +65,7 @@ Like so:
 
 ## Usage
     var urlPloader = require('urlploader');
-    var up = new urlPloader({subItemKey: 'pages'});
+    var up = new urlPloader(options);
 
     var flatArray = up.toFlat(myTree);
     var treeArray = up.toFlat(flatArray);

@@ -20,7 +20,7 @@ gulp.task('develop', function () {
 });
 
 gulp.task('test', function () {
-    return gulp.src('test/compareTest.js')
+    return gulp.src('test/*.js')
         .pipe(mocha({reporter: 'spec'})
         .on("error", handleError));
 });
