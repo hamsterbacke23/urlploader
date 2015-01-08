@@ -11,7 +11,7 @@ Converts back and forth flat arrays with `url`-keys and arbitrary data to tree s
     var up = new urlPloader(options);
 
     var flatArray = up.toFlat(myTree);
-    var treeArray = up.toFlat(flatArray);
+    var treeArray = up.toTree(flatArray);
 
 
 ## Data-examples
