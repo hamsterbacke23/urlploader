@@ -3,7 +3,9 @@ var deepExt = require('deep-extend');
 // Constructor
 function UrlPloader(options) {
   var defaultOptions = {
-    subItemsKey : 'pages'
+    subItemsKey:    'pages',
+    urlKey:         'url',
+    ignoreProtocol: false
   };
   this.options = deepExt(defaultOptions, options);
 }
@@ -54,9 +56,13 @@ UrlPloader.prototype.getRidOfAssocKeys = function(input) {
   // and clean out array keys from array
   for(var key in input) {
     if (!input.hasOwnProperty(key)) {
-
       continue;
     }
+
+    // recurse
+    input[key] = this.getRidOfAssocKeys(input[key]);
+
+    // for arrays convert them to non-associative
     if (key === subItemsKey && input[key].constructor === Array) {
       var tmpArr = [];
       for(var subKey in input[key]) {
@@ -64,14 +70,6 @@ UrlPloader.prototype.getRidOfAssocKeys = function(input) {
       }
       input[key] = tmpArr;
     }
-  }
-
-  // just recurse
-  for(var key2 in input) {
-    if (!input.hasOwnProperty(key2)) {
-      continue;
-    }
-    input[key2] = this.getRidOfAssocKeys(input[key2]);
   }
 
   return input;
@@ -85,7 +83,9 @@ UrlPloader.prototype.getRidOfAssocKeys = function(input) {
  * @return {array} tree strucure array with objects
  */
 UrlPloader.prototype.toTree = function(items) {
-  var subItemsKey = this.options.subItemsKey;
+  var subItemsKey = this.options.subItemsKey,
+    urlKey = this.options.urlKey,
+    ignoreProtocol = this.options.ignoreProtocol;
 
   // build empty structure
   // can this be done more cleanly?
@@ -95,9 +95,18 @@ UrlPloader.prototype.toTree = function(items) {
   result[subItemsKey] = [];
 
   items.forEach(function(item, index, array) {
-    var newUrl, newItem, tmpParts, cutLength;
+    var newId, newItem, tmpParts, cutLength;
 
-    var parts = item.url.split('/');
+    var rgxPattern = new RegExp('https?:\/\/|^(\/*)', 'gi');
+    var matches = item[urlKey].match(rgxPattern);
+
+    if(matches.length > 1) {
+      throw "Error: Url can not be processed via regex matches: " + matches.join(', ');
+    }
+    var urlPrefix = matches.length && ignoreProtocol === false ? matches[0] : '';
+    var urlId = item[urlKey].replace(rgxPattern, "");
+
+    var parts = urlId.split('/');
     var tmpData = item;
 
     var temp = [];
@@ -112,13 +121,12 @@ UrlPloader.prototype.toTree = function(items) {
       // cut last few items away from all parts to get current url
       cutLength = lastIndex - i > 0 ? lastIndex - i  : 0;
       tmpParts.splice(- cutLength,  cutLength );
-      newUrl = tmpParts.join('/');
+      newId = urlPrefix + tmpParts.join('/');
 
-      // make new item
+      // create new item
       newItem = {};
       newItem[subItemsKey] = [];
-      newItem.url = newUrl;
-      // newItem._expand = false;
+      newItem[urlKey] = newId;
 
       // if last item, overwrite with available data
       if (i === lastIndex) {
@@ -126,7 +134,7 @@ UrlPloader.prototype.toTree = function(items) {
         newItem = deepExt(newItem, tmpData);
       }
 
-      temp[newUrl] = newItem;
+      temp[newId] = newItem;
       temp = newItem[subItemsKey];
     }
     result[subItemsKey] = deepExt(result[subItemsKey], paths);
