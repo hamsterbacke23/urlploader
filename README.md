@@ -13,6 +13,26 @@ Converts back and forth flat arrays with `url`-keys and arbitrary data to tree s
     var flatArray = up.toFlat(myTree);
     var treeArray = up.toTree(flatArray);
 
+### Options
+
+    var options = {
+        subItemsKey: 'items',
+        urlKey : 'uri',
+        ignoreProtocol: true
+    }
+
+ - `subItemsKey` <br />
+    *default* pages<br />
+    *type* string<br />
+    The key name which identifies sub items
+ - `urlKey` <br />
+    *default* url<br />
+    *type* string<br />
+    The key name which identifies the url
+ - `ignoreProtocol` <br />
+    *default* false<br />
+    *type* boolean<br />
+    If true, http, https, //, of urls will be ignored
 
 ## Data-examples
 
