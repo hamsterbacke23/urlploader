@@ -3,6 +3,13 @@
   "version": "0.0.3",
   "description": "",
   "main": "urlploader.js",
+  "keywords": [
+    "array",
+    "flatten",
+    "url",
+    "tree",
+    "url-tree"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/hamsterbacke23/urlploader.git"
