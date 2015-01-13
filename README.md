@@ -1,9 +1,7 @@
 ## Urlploader
+Converts back and forth flat arrays to and from tree structured arrays. It uses the urls to establish the tree structure and hierarchy.
 
 [![Build Status](https://secure.travis-ci.org/hamsterbacke23/urlploader.svg)](http://travis-ci.org/hamsterbacke23/urlploader)
-
-## What does it do?
-Converts back and forth flat arrays with `url`-keys and arbitrary data to tree structured arrays.
 
 ### Installation
     npm install urlploader
@@ -36,9 +34,9 @@ Converts back and forth flat arrays with `url`-keys and arbitrary data to tree s
     *type* boolean<br />
     If true, http, https, //, of urls will be ignored
 
-## Data-examples
+## Data-example
 
-### Flat:
+### Converts this flat array...
     [
       {
         "url": "mydomain.com/blog",
@@ -66,7 +64,7 @@ Converts back and forth flat arrays with `url`-keys and arbitrary data to tree s
 
 
 
-### Tree:
+### ...to a tree:
     [{
       "pages": [
         {
